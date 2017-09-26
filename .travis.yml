@@ -9,19 +9,17 @@ addons:
     packages: &common_packages
       - gdb
 
-compiler:
-  - clang
-  - gcc
-
 matrix:
   fast_finish: true
   include:
-    - env: CONFIG=Debug
+    - compiler: gcc
+      env: CONFIG=Debug
       addons: &common_addons
         apt:
           sources: [ mongodb-3.4-trusty ]
           packages: [ mongodb-org, *common_packages ]
-    - env: CONFIG=Release
+    - compiler: gcc
+      env: CONFIG=Release
       addons: *common_addons
 
 before_install:
