@@ -8,10 +8,6 @@ addons:
     packages: &common_packages
       - gdb
 
-compiler:
-  - gcc
-  - clang
-
 matrix:
   fast_finish: true
   include:
