@@ -24,11 +24,6 @@ matrix:
     - env: CONFIG=Release
       addons: *common_addons
 
-env:
-    matrix:
-        - CONFIG=Release
-        - CONFIG=Debug
-
 before_install:
     # Mongo C Driver
     - git clone https://github.com/mongodb/mongo-c-driver.git
@@ -41,7 +36,7 @@ install:
 
     - git submodule update --init --recursive
 
-    - ./autogen.sh --enable-tests=no --enable-examples=no --with-libbson=bundled; make; sudo make install
+    - ./autogen.sh --disable-automatic-init-and-cleanup --enable-tests=no --enable-examples=no --with-libbson=bundled; make; sudo make install
 
     - popd
 
