@@ -21,6 +21,12 @@ matrix:
     - compiler: gcc
       env: CONFIG=Release
       addons: *common_addons
+    - compiler: clang
+      env: CONFIG=Debug
+      addons: *common_addons
+    - compiler: clang
+      env: CONFIG=Release
+      addons: *common_addons
 
 before_install:
     # Mongo C Driver
