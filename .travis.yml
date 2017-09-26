@@ -9,23 +9,19 @@ addons:
     packages: &common_packages
       - gdb
 
+compiler:
+  - clang
+  - gcc
+
 matrix:
   fast_finish: true
   include:
-    - compiler: gcc
-      env: CONFIG=Debug
+    - env: CONFIG=Debug
       addons: &common_addons
         apt:
           sources: [ mongodb-3.4-trusty ]
           packages: [ mongodb-org, *common_packages ]
-    - compiler: gcc
-      env: CONFIG=Release
-      addons: *common_addons
-    - compiler: clang
-      env: CONFIG=Debug
-      addons: *common_addons
-    - compiler: clang
-      env: CONFIG=Release
+    - env: CONFIG=Release
       addons: *common_addons
 
 env:
@@ -38,12 +34,6 @@ before_install:
     - git clone https://github.com/mongodb/mongo-c-driver.git
 
 install:
-    # GCC
-    - if [ "$CXX" = "g++" ]; then sudo apt-get install -qq g++-4.9; export CXX="g++-4.9"; export CC="gcc-4.9"; fi
-
-    # Clang
-    - if [ "$CXX" == "clang++" ]; then sudo apt-get install --allow-unauthenticated -qq clang-3.6; export CXX="clang++-3.6"; export CC="clang-3.6"; fi
-
     # Install Mongo C Driver
     - pushd mongo-c-driver
 
